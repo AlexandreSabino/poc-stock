@@ -6,9 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.cassandra.core.PrimaryKeyType;
 import org.springframework.data.cassandra.mapping.Column;
+import org.springframework.data.cassandra.mapping.PrimaryKey;
 import org.springframework.data.cassandra.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.mapping.Table;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Table
@@ -16,19 +18,13 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Inventory {
+public class Inventory implements Serializable {
 
-    @PrimaryKeyColumn(name = "sku", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
-    private String sku;
+    @PrimaryKey
+    private InventoryId inventoryId;
 
-    @PrimaryKeyColumn(name = "warehouseCode", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
-    private int warehouseCode;
-
-    @PrimaryKeyColumn(name = "sellerId", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
-    private String sellerId;
-
-    @PrimaryKeyColumn(name = "productOrigin", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
-    private int productOrigin;
+    @Column(value = "saveDate")
+    private long saveDate;
 
     @Column(value = "distributionCenter")
     private String distributionCenter;
@@ -38,6 +34,10 @@ public class Inventory {
 
     @Column(value = "reservedQuantity")
     private double reservedQuantity;
+
+    public double getAvailableQuantity() {
+        return this.quantity - this.reservedQuantity;
+    }
 
     @Column(value = "virtual")
     private Boolean virtual;

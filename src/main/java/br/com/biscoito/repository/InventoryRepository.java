@@ -1,21 +1,16 @@
 package br.com.biscoito.repository;
 
 import br.com.biscoito.entities.Inventory;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.cassandra.core.CassandraOperations;
-import org.springframework.stereotype.Component;
+import br.com.biscoito.entities.InventoryId;
+import org.springframework.data.repository.CrudRepository;
 
-@Component
-@RequiredArgsConstructor
-public class InventoryRepository {
+import java.util.Optional;
 
-    private final CassandraOperations cassandraOperations;
+public interface InventoryRepository extends CrudRepository<Inventory, InventoryId> {
 
-    public Inventory insert(final Inventory inventory) {
-        return cassandraOperations.insert(inventory);
-    }
-
-    public Inventory update(final Inventory inventory) {
-        return cassandraOperations.update(inventory);
-    }
+    Optional<Inventory> findByInventoryIdWarehouseCodeAndInventoryIdSkuAndInventoryIdSellerIdAndInventoryIdProductOrigin(
+            int warehouseCode,
+            String sku,
+            String sellerId,
+            int productOrigin);
 }

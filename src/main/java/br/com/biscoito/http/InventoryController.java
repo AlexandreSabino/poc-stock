@@ -20,9 +20,10 @@ public class InventoryController {
     private final TestHelper testHelper;
 
     @PostMapping(value = "api/inventory", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<Inventory> insert(@RequestBody final Inventory inventory) {
+    public ResponseEntity<Inventory> save(@RequestBody final Inventory inventory) {
         return new ResponseEntity<>(inventoryService.save(inventory), HttpStatus.OK);
     }
+
 
     @PostMapping(value = "api/inventory/mass/testing")
     public void massTesting(@RequestBody final String records) {

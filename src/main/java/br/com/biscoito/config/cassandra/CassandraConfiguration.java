@@ -1,4 +1,4 @@
-package br.com.biscoito.config;
+package br.com.biscoito.config.cassandra;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.java.AbstractCassandraConfiguration;

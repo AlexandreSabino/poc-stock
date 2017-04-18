@@ -1,9 +1,10 @@
 package br.com.biscoito.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.cassandra.core.PrimaryKeyType;
+import org.springframework.data.cassandra.mapping.Column;
+import org.springframework.data.cassandra.mapping.PrimaryKey;
+import org.springframework.data.cassandra.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.mapping.Table;
 
 import java.time.LocalDateTime;
@@ -13,27 +14,27 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Kardex {
 
-    private LocalDateTime dateOfMovement;
+    @PrimaryKey
+    private KardexId kardexId;
 
-    private String sku;
-
-    private int warehouseCode;
-
-    private String sellerId;
-
-    private int productOrigin;
-
+    @Column(value = "distributionCenter")
     private String distributionCenter;
 
+    @Column(value = "quantityMovement")
     private double quantityMovement;
 
+    @Column(value = "quantityOld")
     private double quantityOld;
 
+    @Column(value = "quantityActual")
     private double quantityActual;
 
+    @Column(value = "origin")
     private String origin;
 
+    @Column(value = "typeMovement")
     private String typeMovement;
 }
