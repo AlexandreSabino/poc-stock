@@ -19,8 +19,8 @@ public class StockController {
     private final StockService stockService;
 
     @PostMapping(value = "api/stock", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity toMove(@RequestBody final InventoryMovement inventoryMovement) throws ExecutionException, InterruptedException {
-        stockService.toMove(inventoryMovement);
+    public ResponseEntity toMove(@RequestBody final InventoryMovement inventoryMovement) {
+        stockService.toMoveAsync(inventoryMovement);
         return new ResponseEntity(HttpStatus.OK);
     }
 }
