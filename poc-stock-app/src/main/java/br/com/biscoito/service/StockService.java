@@ -1,26 +1,28 @@
 package br.com.biscoito.service;
 
-import br.com.biscoito.entities.Inventory;
-import br.com.biscoito.entities.InventoryMovement;
-import br.com.biscoito.entities.Kardex;
-import br.com.biscoito.entities.KardexId;
+import br.com.biscoito.entities.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class StockService {
 
-    private static final String TOPIC_STOCK_KAFKA =  "stock";
+    private static final String TOPIC_STOCK_KAFKA = "stock_";
 
     private final ExecutorService pool = Executors.newCachedThreadPool();
 
@@ -35,6 +37,7 @@ public class StockService {
     @KafkaListener(topics = TOPIC_STOCK_KAFKA)
     public void process(final String json) {
         try {
+            log.info(json);
             final InventoryMovement inventoryMovement = objectMapper.readValue(json, InventoryMovement.class);
             this.toMove(inventoryMovement);
         } catch (Exception e) {
@@ -50,7 +53,7 @@ public class StockService {
                     inventoryMovement.getInventoryId().getSku(),
                     json);
 
-            future.get().getProducerRecord().toString();
+            future.get();
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

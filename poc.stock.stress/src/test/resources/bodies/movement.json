@@ -1,0 +1,14 @@
+{
+  "inventoryId" : {
+    "sku" :"${sku}",
+    "warehouseCode": ${warehouseCode},
+    "sellerId" : 0,
+    "productOrigin": ${productOrigin}
+  },
+  "typeMovement" : ${typeMovement},
+  "quantity" : ${quantity},
+  "systemOrigin" : "${systemOrigin}",
+  "distributionCenter" : "${distributionCenter}",
+  "warehouseName" : "${warehouseName}",
+  "virtual" : ${virtual}
+}
