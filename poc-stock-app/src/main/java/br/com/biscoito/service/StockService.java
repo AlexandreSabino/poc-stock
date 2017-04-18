@@ -4,7 +4,6 @@ import br.com.biscoito.entities.Inventory;
 import br.com.biscoito.entities.InventoryMovement;
 import br.com.biscoito.entities.Kardex;
 import br.com.biscoito.entities.KardexId;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -13,11 +12,7 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
 
-import javax.swing.plaf.PanelUI;
-import java.io.IOException;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

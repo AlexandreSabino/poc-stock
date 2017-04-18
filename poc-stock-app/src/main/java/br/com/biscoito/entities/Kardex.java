@@ -1,13 +1,9 @@
 package br.com.biscoito.entities;
 
 import lombok.*;
-import org.springframework.cassandra.core.PrimaryKeyType;
 import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKey;
-import org.springframework.data.cassandra.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.mapping.Table;
-
-import java.time.LocalDateTime;
 
 @Table
 @Getter

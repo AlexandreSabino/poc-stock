@@ -1,7 +1,6 @@
 package br.com.biscoito.service;
 
 import br.com.biscoito.entities.Inventory;
-import br.com.biscoito.entities.InventoryId;
 import br.com.biscoito.entities.InventoryMovement;
 import br.com.biscoito.repository.InventoryRepository;
 import lombok.RequiredArgsConstructor;
